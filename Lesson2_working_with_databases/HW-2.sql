@@ -1,7 +1,7 @@
--- Основная часть
--- перечислить все таблицы и первичные ключи в базе данных. 
+-- РћСЃРЅРѕРІРЅР°СЏ С‡Р°СЃС‚СЊ
+-- РїРµСЂРµС‡РёСЃР»РёС‚СЊ РІСЃРµ С‚Р°Р±Р»РёС†С‹ Рё РїРµСЂРІРёС‡РЅС‹Рµ РєР»СЋС‡Рё РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…. 
 
--- |Имя таблицы	  | Первичный ключ
+-- |РРјСЏ С‚Р°Р±Р»РёС†С‹	  | РџРµСЂРІРёС‡РЅС‹Р№ РєР»СЋС‡
 ------------------------------------------
 -- |actor 	      | actor_id
 -- |address	      | address_id
@@ -20,26 +20,26 @@
 -- |store 	      | store_id
 
 
--- Вывести всех неактивных покупателей
+-- Р’С‹РІРµСЃС‚Рё РІСЃРµС… РЅРµР°РєС‚РёРІРЅС‹С… РїРѕРєСѓРїР°С‚РµР»РµР№
 select customer_id, last_name, first_name, email 
 from customer 
 where active = 0
 order by last_name, first_name; 
 
--- вывести все фильмы, выпущенные в 2006 году
+-- РІС‹РІРµСЃС‚Рё РІСЃРµ С„РёР»СЊРјС‹, РІС‹РїСѓС‰РµРЅРЅС‹Рµ РІ 2006 РіРѕРґСѓ
 select title, description, release_year 
 from film 
 where release_year = 2006
 order by title;
 
--- вывести 10 последних платежей за прокат фильмов.
+-- РІС‹РІРµСЃС‚Рё 10 РїРѕСЃР»РµРґРЅРёС… РїР»Р°С‚РµР¶РµР№ Р·Р° РїСЂРѕРєР°С‚ С„РёР»СЊРјРѕРІ.
 select payment_id, customer_id, amount, payment_date 
 from payment 
 order by payment_date desc
 limit 10;
 
--- Дополнительная часть
--- вывести первичные ключи через запрос. Для написания простого запроса можете воспользоваться information_schema.table_constraints
+-- Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ С‡Р°СЃС‚СЊ
+-- РІС‹РІРµСЃС‚Рё РїРµСЂРІРёС‡РЅС‹Рµ РєР»СЋС‡Рё С‡РµСЂРµР· Р·Р°РїСЂРѕСЃ. Р”Р»СЏ РЅР°РїРёСЃР°РЅРёСЏ РїСЂРѕСЃС‚РѕРіРѕ Р·Р°РїСЂРѕСЃР° РјРѕР¶РµС‚Рµ РІРѕСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ information_schema.table_constraints
 select tc.table_name, kc.column_name
 from information_schema.table_constraints tc
   join information_schema.key_column_usage kc 
@@ -47,7 +47,7 @@ from information_schema.table_constraints tc
 where tc.constraint_type = 'PRIMARY KEY'
 order by tc.table_name;
         
--- расширить запрос с первичными ключами, добавив информацию по типу данных information_schema.columns
+-- СЂР°СЃС€РёСЂРёС‚СЊ Р·Р°РїСЂРѕСЃ СЃ РїРµСЂРІРёС‡РЅС‹РјРё РєР»СЋС‡Р°РјРё, РґРѕР±Р°РІРёРІ РёРЅС„РѕСЂРјР°С†РёСЋ РїРѕ С‚РёРїСѓ РґР°РЅРЅС‹С… information_schema.columns
 select tc.table_name, kc.column_name, ic.data_type 
 from information_schema.table_constraints tc
   join information_schema.key_column_usage kc 
